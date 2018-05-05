@@ -14,7 +14,6 @@ class Dashboard extends React.Component{
 	}	
 	
 	componentDidMount() {
-		console.log("component");
 		const rootRef = firebase.database().ref().child('root');
 		//console.log(rootRef);
 		const userRef = rootRef.child('user');
@@ -27,6 +26,7 @@ class Dashboard extends React.Component{
 				gender: snap.child('gender').val()						
 			});
 		});
+
 	}
 
 	componentWillUnmount() {
@@ -34,7 +34,6 @@ class Dashboard extends React.Component{
 	}
 
 	render() {
-		const name = "mukul";
 		return(
 			<div>
 				<nav className="nav-bar">					

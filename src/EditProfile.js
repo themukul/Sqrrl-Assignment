@@ -55,13 +55,14 @@ class EditProfile extends React.Component{
       					</div>
 					<div className="row">
         					<div className="input-field col s12">
-          						<input id="age" type="text" className="validate" ref="age" defaultValue={this.state.age} onChange={this.handleChange}/>
+          						<input id="age" type="text" className="validate" ref="age" defaultValue={this.state.age onChange={this.handleChange}/>
           						<label htmlFor="age">Age</label>
         					</div>
       					</div>
 					<div className="row">
         					<div className="input-field col s12">
           						<input id="gender" type="text" className="validate" ref="gender" defaultValue={this.state.gender} onChange={this.handleChange}/>
+
           						<label htmlFor="gender">Gender</label>
         					</div>
       					</div>
