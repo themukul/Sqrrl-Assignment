@@ -46,7 +46,7 @@ class Dashboard extends React.Component{
      					</button>
 				</nav>
 				<div className="center-align">								
-					<h4>Welcome {name}</h4>
+					<h4>Welcome {this.state.name}</h4>
 				</div>				
 				<div className="center-align">
 					Name : {this.state.name}

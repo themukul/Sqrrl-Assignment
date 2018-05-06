@@ -31,14 +31,16 @@ class EditProfile extends React.Component{
 	}
 
 	handleChange(event){
+		console.log("inside handleChange" + event.target.name);
 		this.setState({
-			[event.target.ref]: event.target.value
+			[event.target.name]: event.target.value
 		})
 	}
 
 	handleSubmit(event){
+		console.log("inside handleSubmit");
 		event.preventDefault();
-		const dbRef = firebase.database().ref("root/user");
+		const dbRef = firebase.database().ref("/root/user");
 		dbRef.update({name: this.state.name, age: this.state.age, gender: this.state.gender});
 	}
 
@@ -49,29 +51,24 @@ class EditProfile extends React.Component{
 				<form className="col l4 offset-l4 z-depth-3 edit-profile-form" onSubmit={this.handleSubmit}>	
 					<div className="row">
         					<div className="input-field col s12">
-          						<input id="name" type="text" className="validate" ref="name" defaultValue={this.state.name} onChange={this.handleChange}/>
+          						<input id="name" name="name" type="text" className="validate" ref="name" defaultValue={this.state.name} onChange={this.handleChange}/>
           						<label htmlFor="name">Name</label>
         					</div>
       					</div>
 					<div className="row">
         					<div className="input-field col s12">
-          						<input id="age" type="text" className="validate" ref="age" defaultValue={this.state.age onChange={this.handleChange}/>
+          						<input id="age" name="age" type="text" className="validate" ref="age" defaultValue={this.state.age} onChange={this.handleChange}/>
           						<label htmlFor="age">Age</label>
         					</div>
       					</div>
 					<div className="row">
         					<div className="input-field col s12">
-          						<input id="gender" type="text" className="validate" ref="gender" defaultValue={this.state.gender} onChange={this.handleChange}/>
+          						<input id="gender" name="gender" type="text" className="validate" ref="gender" defaultValue={this.state.gender} onChange={this.handleChange}/>
 
           						<label htmlFor="gender">Gender</label>
         					</div>
       					</div>
-					<div className="row">
-        					<div className="input-field col s12">
-          						<input id="password" type="password" className="validate" ref="password"/>
-          						<label htmlFor="password">Password</label>
-        					</div>
-      					</div>
+					
 					<button className="btn waves-effect waves-light" type="submit" name="action">Update
     					<i className="material-icons right">send</i>
   					</button>
