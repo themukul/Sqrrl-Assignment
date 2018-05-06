@@ -45,6 +45,7 @@ class EditProfile extends React.Component{
 		event.preventDefault();
 		const dbRef = firebase.database().ref("/root/user");
 		dbRef.update({name: this.state.name, age: this.state.age, gender: this.state.gender});
+
 	}
 
 	render() {

@@ -2,6 +2,8 @@ import React from 'react';
 import './LoginPage.css';
 import { Link } from 'react-router-dom';
 import * as firebase from 'firebase';
+import * as routes from './RoutesConstants';
+import { Redirect } from 'react-router-dom';
 
 class LoginPage extends React.Component{
 
@@ -16,14 +18,6 @@ class LoginPage extends React.Component{
 
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.handleChange = this.handleChange.bind(this);
-		this.handleAuthSuccess = this.handleAuthSuccess.bind(this);
-	}
-
-	handleAuthSuccess(){
-		const user = firebase.auth().currentUser;
-		this.setState({
-			user
-		});	
 	}
 
 	handleChange(event){
@@ -37,12 +31,12 @@ class LoginPage extends React.Component{
 		console.log("inside handleSubmit");
 		event.preventDefault();
 		const authRef = firebase.auth();
-		authRef.signInWithEmailAndPassword(this.state.email, this.state.password).catch(function(error) {
-			console.log(error.message);
-			console.log(error.code);
-		}).then(function() {
+		authRef.signInWithEmailAndPassword(this.state.email, this.state.password).then(function() {
 			console.log(firebase.auth().currentUser);
 			
+		}).catch(function(error) {
+			console.log(error.message);
+			console.log(error.code);
 		});
 		
 	}
@@ -50,6 +44,7 @@ class LoginPage extends React.Component{
 		
 
 	render() {
+		
 		return(
 			<div className="row">
 				<form className="col l4 offset-l4 z-depth-3 login-form" onSubmit={this.handleSubmit}>	
