@@ -8,6 +8,9 @@ class EditProfile extends React.Component{
 		super(props);
 
 		this.state = {
+			name: " ",
+			age: " ",
+			gender: " "
 		};
 	
 		this.handleChange = this.handleChange.bind(this);
@@ -15,7 +18,7 @@ class EditProfile extends React.Component{
 	}
 
 	componentDidMount() {
-		console.log("componennt")
+		console.log("component")
 		const rootRef = firebase.database().ref().child('root');
 		//console.log(rootRef);
 		const userRef = rootRef.child('user');
@@ -45,9 +48,16 @@ class EditProfile extends React.Component{
 	}
 
 	render() {
-
+		if(this.state.name == " "){
+			return null;
+		}
+		
 		return(
+			
+
+			
 			<div className="row">
+
 				<form className="col l4 offset-l4 z-depth-3 edit-profile-form" onSubmit={this.handleSubmit}>	
 					<div className="row">
         					<div className="input-field col s12">
