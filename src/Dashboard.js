@@ -14,12 +14,15 @@ class Dashboard extends React.Component{
 			email: "",
 			age: "",
 			gender: "",
-			editProfile: 0,
+			editProfile: 0,		
 			user: null,
+			
 		};
 
 		this.handleEditProfile = this.handleEditProfile.bind(this);
-		this.handleSignOut = this.handleSignOut.bind(this);	
+		this.handleSignOut = this.handleSignOut.bind(this);
+		//this.handleChange = this.handleChange.bind(this);
+		//this.handleUpdatePass = this.handleUpdatePass.bind(this);	
 	}	
 	
 	componentDidMount() {
@@ -31,7 +34,7 @@ class Dashboard extends React.Component{
 		userRef.on('value', (snap) => {
 			this.setState({
 				name: snap.child('name').val(),
-				email: snap.child('email').val(),
+				email: user.email,
 				age: snap.child('age').val(),
 				gender: snap.child('gender').val(),
 				user						
@@ -57,6 +60,21 @@ class Dashboard extends React.Component{
 		currentState.user = null;
 		firebase.auth().signOut().then(this.setState({currentState}));
 	}
+	/*
+	handleChange(event){
+		console.log("inside handleChange " + event.target.name);
+		this.setState({
+			[event.target.name]: event.target.value
+		})
+	}
+	
+	
+	handleUpdatePass(){
+		var user = firebase.auth().currentUser;
+		var newPassword = this.state.newPassword;
+		user.updatePassword(newPassword).then(this.handleSignOut);
+	}
+	*/
 
 	render() {
 		if(this.state.editProfile){
@@ -75,7 +93,11 @@ class Dashboard extends React.Component{
 					<button className="btn waves-effect waves-light edit-profile-btn right" onClick={this.handleEditProfile}>
 						Edit Profile
      					</button>
+
+					 
+
 				</nav>
+				
 				<div className="center-align">								
 					<h4>Welcome {this.state.name}</h4>
 				</div>				

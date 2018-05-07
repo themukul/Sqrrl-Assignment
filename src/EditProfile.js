@@ -12,6 +12,7 @@ class EditProfile extends React.Component{
 			name: " ",
 			age: " ",
 			gender: " ",
+			password: " ",
 			dashboard: 0
 		};
 	
@@ -47,6 +48,11 @@ class EditProfile extends React.Component{
 		console.log("inside handleSubmit");
 		event.preventDefault();
 		const dbRef = firebase.database().ref("/root/user");
+		if(this.state.password !== " "){
+			var user = firebase.auth().currentUser;
+			var newPassword = this.state.password;
+			user.updatePassword(newPassword);
+		}
 		dbRef.update({name: this.state.name, age: this.state.age, gender: this.state.gender}).then(this.handleRedirect);
 
 	}
@@ -73,7 +79,7 @@ class EditProfile extends React.Component{
 			
 			<div className="row">
 
-				<form className="col l4 offset-l4 z-depth-3 edit-profile-form" onSubmit={this.handleSubmit}>	
+				<form className="col s12 l4 offset-l4 z-depth-3 edit-profile-form" onSubmit={this.handleSubmit}>	
 					<div className="row">
         					<div className="input-field col s12">
           						<input id="name" name="name" type="text" className="validate" ref="name" defaultValue={this.state.name} onChange={this.handleChange}/>
@@ -91,6 +97,14 @@ class EditProfile extends React.Component{
           						<input id="gender" name="gender" type="text" className="validate" ref="gender" defaultValue={this.state.gender} onChange={this.handleChange}/>
 
           						<label htmlFor="gender">Gender</label>
+        					</div>
+      					</div>
+
+					<div className="row">
+        					<div className="input-field col s12">
+          						<input id="password" name="password" type="password" className="validate" ref="password" onChange={this.handleChange}/>
+
+          						<label htmlFor="password">Password (Must be atleast 6 characters)</label>
         					</div>
       					</div>
 					

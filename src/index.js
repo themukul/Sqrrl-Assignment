@@ -1,8 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import LoginPage from './LoginPage';
-import Dashboard from './Dashboard';
-import EditProfile from './EditProfile';
 import App from './App';
 import * as firebase from 'firebase';
 
@@ -18,24 +15,6 @@ var config = {
 
 
 firebase.initializeApp(config);
-/*
-ReactDOM.render(
-	<LoginPage />,	
-	document.getElementById('app')
-);
-
-ReactDOM.render(
-	<Dashboard />,	
-	document.getElementById('app')
-);
-<<<<<<< HEAD
-
-
-ReactDOM.render(
-	<EditProfile />,	
-	document.getElementById('app')
-);
-*/
 
 
 ReactDOM.render(

@@ -57,7 +57,7 @@ class LoginPage extends React.Component{
 		
 		return(
 			<div className="row">
-				<form className="col l4 offset-l4 z-depth-3 login-form" onSubmit={this.handleSubmit}>	
+				<form className="col s12 l4 offset-l4 z-depth-3 login-form" onSubmit={this.handleSubmit}>	
 					<div className="row">
         					<div className="input-field col s12">
           						<input id="email" name="email" type="email" className="validate" onChange={this.handleChange} />
