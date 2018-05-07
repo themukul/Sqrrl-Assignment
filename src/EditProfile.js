@@ -1,6 +1,7 @@
 import React from 'react';
 import './EditProfile.css';
 import * as firebase from 'firebase';
+import { Redirect } from 'react-router-dom';
 
 class EditProfile extends React.Component{
 
@@ -10,11 +11,13 @@ class EditProfile extends React.Component{
 		this.state = {
 			name: " ",
 			age: " ",
-			gender: " "
+			gender: " ",
+			dashboard: 0
 		};
 	
 		this.handleChange = this.handleChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
+		this.handleRedirect = this.handleRedirect.bind(this);
 	}
 
 	componentDidMount() {
@@ -44,13 +47,24 @@ class EditProfile extends React.Component{
 		console.log("inside handleSubmit");
 		event.preventDefault();
 		const dbRef = firebase.database().ref("/root/user");
-		dbRef.update({name: this.state.name, age: this.state.age, gender: this.state.gender});
+		dbRef.update({name: this.state.name, age: this.state.age, gender: this.state.gender}).then(this.handleRedirect);
 
 	}
 
+	handleRedirect() {
+		const currentState = this.state;
+		currentState.dashboard = 1;
+		this.setState({
+			currentState
+		});
+	}
+
 	render() {
-		if(this.state.name == " "){
+		if(this.state.name === " "){
 			return null;
+		}
+		if(this.state.dashboard){
+			return <Redirect to='/dashboard' />
 		}
 		
 		return(

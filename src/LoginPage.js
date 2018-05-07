@@ -18,6 +18,7 @@ class LoginPage extends React.Component{
 
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.handleChange = this.handleChange.bind(this);
+		this.handleRedirect = this.handleRedirect.bind(this);
 	}
 
 	handleChange(event){
@@ -31,19 +32,28 @@ class LoginPage extends React.Component{
 		console.log("inside handleSubmit");
 		event.preventDefault();
 		const authRef = firebase.auth();
-		authRef.signInWithEmailAndPassword(this.state.email, this.state.password).then(function() {
-			console.log(firebase.auth().currentUser);
-			
-		}).catch(function(error) {
+		authRef.signInWithEmailAndPassword(this.state.email, this.state.password).then(this.handleRedirect).catch(function(error) {
 			console.log(error.message);
 			console.log(error.code);
 		});
 		
 	}
 
+	handleRedirect(){
+		const currentState = this.state;
+		currentState.user = firebase.auth().currentUser;
+		this.setState({
+			currentState
+		});
+	}
+
+
 		
 
 	render() {
+		if(this.state.user){
+			return <Redirect to='/dashboard' />
+		}
 		
 		return(
 			<div className="row">

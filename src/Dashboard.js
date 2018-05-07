@@ -3,6 +3,7 @@ import ViewProfile from './ViewProfile';
 import EditProfile from './EditProfile';
 import './Dashboard.css';
 import * as firebase from 'firebase';
+import { Redirect } from 'react-router-dom';
 
 class Dashboard extends React.Component{
 
@@ -10,7 +11,14 @@ class Dashboard extends React.Component{
 		super(props);
 
 		this.state = {
-		};	
+			name: "",
+			email: "",
+			age: "",
+			gender: "",
+			editProfile: 0,
+		};
+
+		this.handleEditProfile = this.handleEditProfile.bind(this);	
 	}	
 	
 	componentDidMount() {
@@ -23,17 +31,29 @@ class Dashboard extends React.Component{
 				name: snap.child('name').val(),
 				email: snap.child('email').val(),
 				age: snap.child('age').val(),
-				gender: snap.child('gender').val()						
+				gender: snap.child('gender').val(),						
 			});
 		});
 
 	}
 
 	componentWillUnmount() {
-		this.userRef.off();
+		//this.userRef.off();
+	}
+
+	handleEditProfile() {
+		const currentState = this.state;
+		currentState.editProfile = 1;
+		this.setState(
+			currentState
+		);
 	}
 
 	render() {
+		if(this.state.editProfile){
+			return <Redirect to='/editprofile' />
+		}
+		
 		return(
 			<div>
 				<nav className="nav-bar">					
@@ -41,7 +61,7 @@ class Dashboard extends React.Component{
 						Sign Out
      					</button>
 					
-					<button className="btn waves-effect waves-light edit-profile-btn right">
+					<button className="btn waves-effect waves-light edit-profile-btn right" onClick={this.handleEditProfile}>
 						Edit Profile
      					</button>
 				</nav>
